@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form action="/mockup" method="post" enctype="multipart/form-data">
+      <input type="file" name="artwork" />
+      <button type="submit">Upload</button>
+    </form>
+  </body>
+</html>
