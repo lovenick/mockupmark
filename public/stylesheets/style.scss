@@ -6,6 +6,33 @@ a {
   color: #00b7ff;
 }
 
-// img {
-//   max-width: 400px;
-// }
+.masonry-wrapper {
+  padding: 1.5em;
+  margin-right: auto;
+  margin-left: auto;
+  .masonry {
+    columns: 1;
+    column-gap: 10px;
+    @media only screen and (max-width: 1023px) and (min-width: 768px) {  
+        columns: 2;
+    }
+    @media only screen and (min-width: 1024px) {
+        columns: 3;
+    }
+    .masonry-item {
+      display: inline-block;
+      vertical-align: top;
+      margin-bottom: 10px;
+      filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, .3));
+      transition: filter .25s ease-in-out;
+      &:hover {
+        filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, .3));
+    }
+      .masonry-content {
+        width:100%;
+      }
+    }
+  }
+}
+
+
