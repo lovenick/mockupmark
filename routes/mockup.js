@@ -8,6 +8,7 @@ var upload = multer({
 });
 
 const { generateMockup, MOCKUPS } = require("../services/mockups");
+// console.log(MOCKUPS)
 
 /* upload artwork */
 router.post("/", upload.single("artwork"), function(req, res, next) {
@@ -15,8 +16,6 @@ router.post("/", upload.single("artwork"), function(req, res, next) {
   const images = [...MOCKUPS.keys()].map(
     mockupId => `${req.originalUrl}/${mockupId}/${artwork}`
   );
-  console.log(MOCKUPS);
-  console.log(images);
   res.render("artwork", {
     title: "Mockups",
     images

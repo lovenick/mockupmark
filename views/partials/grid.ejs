@@ -1,0 +1,13 @@
+<section id="grid">
+  <div class="container">
+    <% include upload.ejs %>
+      <div class="masonry">
+        <% images.forEach(image => { %>
+        <div class="masonry-item">
+          <img class="masonry-content" src="<%= image %>" />
+        </div>
+        <% }) %>
+      </div>
+  </div>
+</section>
+
