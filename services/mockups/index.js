@@ -11,11 +11,17 @@ async function generateNormalizedTemplateMap(params) {
   const applyMask = `convert ${template} ${mask} -alpha off -colorspace gray -compose CopyOpacity -composite ${tmp}`;
   await exec(applyMask);
 
-  const { stdout: brightnessDelta } = await exec(
-    `convert ${tmp} -format "%[fx:100*mean-50]" info:`
+  const { stdout: brightness } = await exec(
+    `convert ${tmp} -background grey50 -alpha remove -format "%[fx:mean]" info:`
   );
 
-  const adjustBrightness = `convert ${tmp} -evaluate subtract ${brightnessDelta}% ${out}`;
+  const { stdout: opacityAmount } = await exec(
+    `convert ${mask} -format "%[fx:mean]" info:`
+  );
+
+  const brightnessDelta = (100 * (brightness - 0.5)) / opacityAmount;
+
+  const adjustBrightness = `convert ${tmp} -evaluate subtract ${brightnessDelta}% -background grey50 -alpha remove -alpha off ${out}`;
   await exec(adjustBrightness);
 }
 
@@ -70,7 +76,7 @@ async function addDisplacement(params) {
 // convert artwork_displaced.png \( -clone 0 masked_template_corrected.png -compose hardlight -composite \) +swap -compose copy_opacity -composite artwork_final.png
 async function addHighlights(params) {
   const { artwork, lightingMap, out } = params;
-  const { mode = "softlight" } = params;
+  const { mode = "hardlight" } = params;
 
   const highlight = `convert ${artwork} \\( -clone 0 ${lightingMap} -compose ${mode} -composite \\) +swap -compose CopyOpacity -composite ${out}`;
   await exec(highlight);
@@ -78,7 +84,7 @@ async function addHighlights(params) {
 
 async function composeArtwork(params) {
   const { template, artwork, mask, out } = params;
-  const compose = `convert ${template} ${artwork} ${mask} -compose multiply -composite ${out}`;
+  const compose = `convert ${template} ${artwork} ${mask} -compose over -composite ${out}`;
   await exec(compose);
 }
 
@@ -90,6 +96,7 @@ async function generateMockup(params) {
   const tmp = tempy.file({ extension: "mpc" });
   await resize({ artwork, out: tmp });
   await addBorder({ artwork: tmp, out: tmp });
+
   await perspectiveTransform({ template, artwork: tmp, coordinates, out: tmp });
   await addDisplacement({ artwork: tmp, displacementMap, out: tmp });
   await addHighlights({ artwork: tmp, lightingMap, out: tmp });
