@@ -94,8 +94,8 @@ async function generateMockup(params) {
   const { coordinates } = params;
 
   const tmp = tempy.file({ extension: "mpc" });
-  await resize({ artwork, out: tmp });
-  await addBorder({ artwork: tmp, out: tmp });
+  // await resize({ artwork, out: tmp });
+  await addBorder({ artwork, out: tmp });
 
   await perspectiveTransform({ template, artwork: tmp, coordinates, out: tmp });
   await addDisplacement({ artwork: tmp, displacementMap, out: tmp });
