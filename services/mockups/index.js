@@ -64,6 +64,12 @@ async function perspectiveTransform(params) {
   await exec(transform);
 }
 
+async function setBackgroundColor(params) {
+  const { artwork, color = "transparent", out } = params;
+  const setBackground = `convert ${artwork} -background ${color} -alpha remove ${out}`;
+  await exec(setBackground);
+}
+
 // convert artwork_distorted.png \( masked_template_gray.png -blur 0x10 \) -compose displace -set option:compose:args 10x10 -composite artwork_displaced.png
 async function addDisplacement(params) {
   const { artwork, displacementMap, out } = params;
@@ -98,6 +104,7 @@ async function generateMockup(params) {
   await addBorder({ artwork, out: tmp });
 
   await perspectiveTransform({ template, artwork: tmp, coordinates, out: tmp });
+  // await setBackgroundColor({ artwork: tmp, color: "black", out: tmp });
   await addDisplacement({ artwork: tmp, displacementMap, out: tmp });
   await addHighlights({ artwork: tmp, lightingMap, out: tmp });
   await composeArtwork({ artwork: tmp, template, mask, out });
