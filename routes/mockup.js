@@ -24,7 +24,6 @@ const upload = multer({
 });
 
 const { generateMockup, MOCKUPS } = require("../services/mockups");
-// console.log(MOCKUPS)
 
 /* upload artwork */
 router.post("/", upload.single("artwork"), function(req, res, next) {
