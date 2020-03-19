@@ -64,4 +64,4 @@ typings/
 .sass-cache/
 
 # uploaded artworks
-uploads/
+uploads/*.png
