@@ -5,63 +5,56 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>MockUp Mark | the Mock up generator for all your needs</title>
-    <meta name="description" content="the Mock up generator for all your needs" />
+    <meta
+      name="description"
+      content="the Mock up generator for all your needs"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:url"                content="https://www.mockupmark.com" />
-    <meta property="og:type"               content="website" />
-    <meta property="og:title"              content="Mockup Mark - the mock up generator" />
-    <meta property="og:description"        content="high quality marketing materials for your print on demand store" />
-    <meta property="og:image"              content="/img/hero2.png" />
-    <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="icon" 
-      type="image/png" 
-      href="img/fav.png">
+    <meta property="og:url" content="https://www.mockupmark.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mockup Mark - the mock up generator" />
+    <meta
+      property="og:description"
+      content="high quality marketing materials for your print on demand store"
+    />
+    <meta property="og:image" content="/img/hero2.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="img/fav.png" />
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      href="https://cdn-images.mailchimp.com/embedcode/classic-10_7.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157117041-1"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-157117041-1"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-157117041-1');
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-157117041-1");
     </script>
   </head>
   <body>
-    <% include partials/nav.ejs %>
-    <% include partials/hero.ejs %>
-    <% include partials/how-to.ejs %>
-    <% include partials/grid.ejs %>
-    <% include partials/why-use.ejs %>
-    <% include partials/everything-you-need.ejs %>
-    <% include partials/footer.ejs %>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://kit.fontawesome.com/c88f61d252.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init()
-    </script>
-    <script src="scripts/index.js"></script>
+    <h1><%= title %></h1>
+    <h2>Realistic apparel mockup generator</h2>
+    <hr />
+    <h3>Upload your design</h3>
+    <%- include('partials/upload.ejs') %>
   </body>
 </html>

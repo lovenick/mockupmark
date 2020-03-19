@@ -60,5 +60,8 @@ typings/
 # next.js build output
 .next
 
+# sass cache
+.sass-cache/
+
 # uploaded artworks
-uploads/
+uploads/*.png
