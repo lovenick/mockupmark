@@ -37,7 +37,6 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <%- include('partials/upload.ejs') %>
     <div class="masonry-wrapper">
       <div class="masonry">
         <% images.forEach(image => { %>
@@ -47,5 +46,8 @@
         <% }) %>
       </div>
     </div>
+    <hr />
+    <h3>Upload another design</h3>
+    <%- include('partials/upload.ejs') %>
   </body>
 </html>
