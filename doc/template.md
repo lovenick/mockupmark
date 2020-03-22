@@ -22,7 +22,7 @@
   - Hover over the corners and check the x and y coordinates in the info panel
 - Write down the coordinates starting from the top left and going **counterclockwise** as `[x1, y1, x2, y2, x3, y3, x4, y4]`
 
-## 3. Generate displacement and lighting maps
+## 4. Generate displacement and lighting maps
 
 - Check out the https://github.com/kvdenden/mockupmark-prototype repository
 - Copy your template and mask images to this folder
@@ -30,7 +30,7 @@
 - Change the template, mask and coordinates parameters in the generation methods at the bottom
 - Run the script: `node index.js`
 
-## 4. Add images and config to mockupmark
+## 5. Add images and config to mockupmark
 
 - Copy the template, mask, displacement map and lighting map to the `services/mockups/templates` folder in mockupmark.
   - Make sure that they follow the naming conventions `x-template.jpg`, `x-mask.png`, `x-displace.png` and `x-lighting.png`
