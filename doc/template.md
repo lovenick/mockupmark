@@ -18,7 +18,7 @@
 
 - Find the 4 corners of the artwork region
   - Create new layer and add a 4x3 rectangle
-  - Transform the rectangle so it matches the artwork region
+  - Transform the rectangle so it matches the artwork region WHERE WAS THE TRANSFORM AGAIN?
   - Hover over the corners and check the x and y coordinates in the info panel
 - Write down the coordinates starting from the top left and going **counterclockwise** as `[x1, y1, x2, y2, x3, y3, x4, y4]`
 
