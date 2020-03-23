@@ -173,6 +173,13 @@ var MOCKUPS = [
     displacementMap: __dirname + "/templates/9-displace.png",
     lightingMap: __dirname + "/templates/9-lighting.png",
     coordinates: [599, 756, 504, 1068, 777, 1094, 871, 777]
+  },
+  {
+    template: __dirname + "/templates/10-template.jpg",
+    mask: __dirname + "/templates/10-mask.png",
+    displacementMap: __dirname + "/templates/10-displace.png",
+    lightingMap: __dirname + "/templates/10-lighting.png",
+    coordinates: [480, 1013, 486, 1370, 746, 1386, 758, 995]
   }
 ];
 
