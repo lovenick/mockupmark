@@ -32,10 +32,8 @@ router.post("/", upload.single("artwork"), function(req, res, next) {
   const images = [...MOCKUPS.keys()].map(
     mockupId => `${req.originalUrl}/${artwork}/${mockupId}.jpg`
   );
-  res.render("artwork", {
-    title: "Mockups",
-    images
-  });
+
+  res.json({ images });
 });
 
 /* generate artwork mockup */
