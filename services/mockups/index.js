@@ -180,6 +180,27 @@ var MOCKUPS = [
     displacementMap: __dirname + "/templates/10-displace.png",
     lightingMap: __dirname + "/templates/10-lighting.png",
     coordinates: [480, 1013, 486, 1370, 746, 1386, 758, 995]
+  },
+  {
+    template: __dirname + "/templates/11-template.jpg",
+    mask: __dirname + "/templates/11-mask.png",
+    displacementMap: __dirname + "/templates/11-displace.png",
+    lightingMap: __dirname + "/templates/11-lighting.png",
+    coordinates: [434, 639, 449, 1062, 700, 1062, 716, 635]
+  },
+  {
+    template: __dirname + "/templates/13-template.jpg",
+    mask: __dirname + "/templates/13-mask.png",
+    displacementMap: __dirname + "/templates/13-displace.png",
+    lightingMap: __dirname + "/templates/13-lighting.png",
+    coordinates: [424, 648, 405, 1156, 783, 1165, 816, 658]
+  },
+  {
+    template: __dirname + "/templates/16-template.jpg",
+    mask: __dirname + "/templates/16-mask.png",
+    displacementMap: __dirname + "/templates/16-displace.png",
+    lightingMap: __dirname + "/templates/16-lighting.png",
+    coordinates: [372, 738, 404, 1286, 733, 1288, 726, 718]
   }
 ];
 
