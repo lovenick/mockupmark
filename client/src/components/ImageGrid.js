@@ -2,22 +2,41 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 import Loader from "react-loader";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import api from "../api";
 
 import "./ImageGrid.scss";
 
 const Image = ({ template, mockup }) => {
+  const [loading, setLoading] = useState(!!mockup);
   return (
     <div className="masonry-item">
-      <img className="masonry-content" src={mockup || template} alt="" />
-      {mockup ? (
-        <a className="button" href={mockup} download>
-          Download
-        </a>
-      ) : (
-        ""
-      )}
+      <div className="masonry-content">
+        <div className="masonry-image">
+          <img src={template} alt="" />
+          {mockup ? (
+            <LazyLoadImage
+              alt=""
+              src={mockup}
+              beforeLoad={() => setLoading(true)}
+              afterLoad={() => setLoading(false)}
+              threshold={500}
+            />
+          ) : (
+            ""
+          )}
+          {loading ? <Loader /> : ""}
+        </div>
+
+        {mockup && !loading ? (
+          <a className="button" href={mockup} download>
+            Download
+          </a>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };
@@ -68,7 +87,11 @@ const ImageGrid = () => {
             {templates.map((template, index) => {
               const mockup = mockups[index];
               return (
-                <Image key={template} template={template} mockup={mockup} />
+                <Image
+                  key={mockup || template}
+                  template={template}
+                  mockup={mockup}
+                />
               );
             })}
           </div>
