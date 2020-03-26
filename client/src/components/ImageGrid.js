@@ -2,46 +2,39 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 import Loader from "react-loader";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {
+  LazyLoadImage,
+  trackWindowScroll
+} from "react-lazy-load-image-component";
 
 import api from "../api";
 
 import "./ImageGrid.scss";
 
-const Image = ({ template, mockup }) => {
-  const [loading, setLoading] = useState(!!mockup);
+const MockupImage = ({ mockup, scrollPosition }) => {
+  const [loading, setLoading] = useState(true);
   return (
-    <div className="masonry-item">
-      <div className="masonry-content">
-        <div className="masonry-image">
-          <img src={template} alt="" />
-          {mockup ? (
-            <LazyLoadImage
-              alt=""
-              src={mockup}
-              beforeLoad={() => setLoading(true)}
-              afterLoad={() => setLoading(false)}
-              threshold={500}
-            />
-          ) : (
-            ""
-          )}
-          {loading ? <Loader /> : ""}
-        </div>
-
-        {mockup && !loading ? (
-          <a className="button" href={mockup} download>
-            Download
-          </a>
-        ) : (
-          ""
-        )}
-      </div>
-    </div>
+    <>
+      <LazyLoadImage
+        alt=""
+        src={mockup}
+        afterLoad={() => setLoading(false)}
+        threshold={500}
+        scrollPosition={scrollPosition}
+      />
+      {loading ? <Loader /> : ""}
+      {mockup && !loading ? (
+        <a className="button" href={mockup} download>
+          Download
+        </a>
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 
-const ImageGrid = () => {
+const ImageGrid = ({ scrollPosition }) => {
   const [templates, setTemplates] = useState([]);
   useEffect(() => {
     api.get("templates").then(response => {
@@ -87,11 +80,22 @@ const ImageGrid = () => {
             {templates.map((template, index) => {
               const mockup = mockups[index];
               return (
-                <Image
-                  key={mockup || template}
-                  template={template}
-                  mockup={mockup}
-                />
+                <div key={template} className="masonry-item">
+                  <div className="masonry-content">
+                    <div className="masonry-image">
+                      <img src={template} alt="" />
+                      {mockup ? (
+                        <MockupImage
+                          key={mockup}
+                          mockup={mockup}
+                          scrollPosition={scrollPosition}
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
+                </div>
               );
             })}
           </div>
@@ -101,4 +105,4 @@ const ImageGrid = () => {
   );
 };
 
-export default ImageGrid;
+export default trackWindowScroll(ImageGrid);
