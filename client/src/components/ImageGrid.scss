@@ -29,18 +29,18 @@ body {
       }
       .button {
         position: absolute;
-        width:100%;
-        bottom:0;
-        right:0;
+        width: 100%;
+        bottom: 0;
+        right: 0;
         text-align: center;
         opacity: 0;
-        transition: opacity .35s ease;
+        transition: opacity 0.35s ease;
         background-color: dodgerblue;
         color: white;
-        padding:10px;
+        padding: 10px;
         text-transform: uppercase;
       }
-      &:hover .button{
+      &:hover .button {
         opacity: 1;
         text-decoration: none;
       }

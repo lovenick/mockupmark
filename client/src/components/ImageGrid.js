@@ -7,17 +7,17 @@ import api from "../api";
 
 import "./ImageGrid.scss";
 
-// const test = () => {
-//   prompt("Please enter your name", "Harry Potter");
-// }
-
-//onClick={test}
-
 const Image = ({ template, mockup }) => {
   return (
     <div className="masonry-item">
       <img className="masonry-content" src={mockup || template} alt="" />
-      { mockup ? <a className="button" href={mockup} download>Download</a>: ''}
+      {mockup ? (
+        <a className="button" href={mockup} download>
+          Download
+        </a>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
