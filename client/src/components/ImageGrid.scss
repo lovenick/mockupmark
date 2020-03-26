@@ -27,6 +27,23 @@ body {
       .masonry-content {
         width: 100%;
       }
+      .button {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        right: 0;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        background-color: dodgerblue;
+        color: white;
+        padding: 10px;
+        text-transform: uppercase;
+      }
+      &:hover .button {
+        opacity: 1;
+        text-decoration: none;
+      }
     }
   }
 }

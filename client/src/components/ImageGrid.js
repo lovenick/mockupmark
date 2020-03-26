@@ -11,6 +11,13 @@ const Image = ({ template, mockup }) => {
   return (
     <div className="masonry-item">
       <img className="masonry-content" src={mockup || template} alt="" />
+      {mockup ? (
+        <a className="button" href={mockup} download>
+          Download
+        </a>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
