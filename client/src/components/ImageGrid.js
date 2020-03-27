@@ -11,6 +11,15 @@ import api from "../api";
 
 import "./ImageGrid.scss";
 
+const MockupLoader = ({ text = "Generating preview..." }) => {
+  return (
+    <div className="loading">
+      <Loader color="white" />
+      <div className="text">{text}</div>
+    </div>
+  );
+};
+
 const MockupImage = ({ mockup, scrollPosition }) => {
   const [loading, setLoading] = useState(true);
   return (
@@ -22,7 +31,7 @@ const MockupImage = ({ mockup, scrollPosition }) => {
         threshold={500}
         scrollPosition={scrollPosition}
       />
-      {loading ? <Loader /> : ""}
+      {loading ? <MockupLoader /> : ""}
       {mockup && !loading ? (
         <a className="button" href={mockup} download>
           Download
