@@ -2,27 +2,48 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 import Loader from "react-loader";
+import {
+  LazyLoadImage,
+  trackWindowScroll
+} from "react-lazy-load-image-component";
 
 import api from "../api";
 
 import "./ImageGrid.scss";
 
-const Image = ({ template, mockup }) => {
+const MockupLoader = ({ text = "Generating preview..." }) => {
   return (
-    <div className="masonry-item">
-      <img className="masonry-content" src={mockup || template} alt="" />
-      {mockup ? (
+    <div className="loading">
+      <Loader color="white" />
+      <div className="text">{text}</div>
+    </div>
+  );
+};
+
+const MockupImage = ({ mockup, scrollPosition }) => {
+  const [loading, setLoading] = useState(true);
+  return (
+    <>
+      <LazyLoadImage
+        alt=""
+        src={mockup}
+        afterLoad={() => setLoading(false)}
+        threshold={500}
+        scrollPosition={scrollPosition}
+      />
+      {loading ? <MockupLoader /> : ""}
+      {mockup && !loading ? (
         <a className="button" href={mockup} download>
           Download
         </a>
       ) : (
         ""
       )}
-    </div>
+    </>
   );
 };
 
-const ImageGrid = () => {
+const ImageGrid = ({ scrollPosition }) => {
   const [templates, setTemplates] = useState([]);
   useEffect(() => {
     api.get("templates").then(response => {
@@ -68,7 +89,22 @@ const ImageGrid = () => {
             {templates.map((template, index) => {
               const mockup = mockups[index];
               return (
-                <Image key={template} template={template} mockup={mockup} />
+                <div key={template} className="masonry-item">
+                  <div className="masonry-content">
+                    <div className="masonry-image">
+                      <img src={template} alt="" />
+                      {mockup ? (
+                        <MockupImage
+                          key={mockup}
+                          mockup={mockup}
+                          scrollPosition={scrollPosition}
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
+                </div>
               );
             })}
           </div>
@@ -78,4 +114,4 @@ const ImageGrid = () => {
   );
 };
 
-export default ImageGrid;
+export default trackWindowScroll(ImageGrid);
