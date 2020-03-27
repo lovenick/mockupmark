@@ -13,6 +13,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-dropzone": "^10.2.1",
+    "react-ga": "^2.7.0",
     "react-helmet": "^5.2.1",
     "react-lazy-load-image-component": "^1.4.1",
     "react-loader": "^2.4.7",

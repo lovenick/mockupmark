@@ -6,10 +6,26 @@ import {
   LazyLoadImage,
   trackWindowScroll
 } from "react-lazy-load-image-component";
+import ReactGA from "react-ga";
 
 import api from "../api";
 
 import "./ImageGrid.scss";
+
+const trackUploadEvent = () => {
+  ReactGA.event({
+    category: "Mockup",
+    action: "Upload"
+  });
+};
+
+const trackDownloadEvent = template => {
+  ReactGA.event({
+    category: "Mockup",
+    action: "Download",
+    label: template
+  });
+};
 
 const MockupLoader = ({ text = "Generating preview..." }) => {
   return (
@@ -20,7 +36,7 @@ const MockupLoader = ({ text = "Generating preview..." }) => {
   );
 };
 
-const MockupImage = ({ mockup, scrollPosition }) => {
+const MockupImage = ({ template, mockup, scrollPosition }) => {
   const [loading, setLoading] = useState(true);
   return (
     <>
@@ -33,7 +49,12 @@ const MockupImage = ({ mockup, scrollPosition }) => {
       />
       {loading ? <MockupLoader /> : ""}
       {mockup && !loading ? (
-        <a className="button" href={mockup} download>
+        <a
+          className="button"
+          href={mockup}
+          download
+          onClick={() => trackDownloadEvent(template)}
+        >
           Download
         </a>
       ) : (
@@ -65,6 +86,7 @@ const ImageGrid = ({ scrollPosition }) => {
       .then(response => {
         setMockups(response.data.images);
       });
+    trackUploadEvent();
   }, []);
   const { getRootProps, getInputProps, open } = useDropzone({
     onDrop,
@@ -96,6 +118,7 @@ const ImageGrid = ({ scrollPosition }) => {
                       {mockup ? (
                         <MockupImage
                           key={mockup}
+                          template={template}
                           mockup={mockup}
                           scrollPosition={scrollPosition}
                         />
