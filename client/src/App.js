@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 
 import Head from "./components/Head";
+import Navbar from "./components/Navbar";
 import ImageGrid from "./components/ImageGrid";
+import Footer from "./components/Footer";
 
 const App = () => {
   useEffect(() => {
@@ -14,12 +16,14 @@ const App = () => {
   return (
     <>
       <Head />
-      <div className="container">
-        <h1>Mockup Mark</h1>
-        <h2>Realistic apparel mockup generator</h2>
+      <Navbar />
+      <main className="container">
+        <h1 className="display-4">Mockup Mark</h1>
+        <h2 className="text-muted">Realistic apparel mockup generator</h2>
         <hr />
         <ImageGrid />
-      </div>
+      </main>
+      <Footer />
     </>
   );
 };
