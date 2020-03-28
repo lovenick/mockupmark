@@ -50,7 +50,7 @@ const MockupImage = ({ template, mockup, scrollPosition }) => {
       {loading ? <MockupLoader /> : ""}
       {mockup && !loading ? (
         <a
-          className="button"
+          className="button btn btn-primary"
           href={mockup}
           download
           onClick={() => trackDownloadEvent(template)}
@@ -102,7 +102,6 @@ const ImageGrid = ({ scrollPosition }) => {
         <button
           type="button"
           className="btn btn-primary btn-block btn-lg"
-          id="upload-button"
           onClick={open}
         >
           Upload your design
