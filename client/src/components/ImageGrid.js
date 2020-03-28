@@ -50,7 +50,7 @@ const MockupImage = ({ template, mockup, scrollPosition }) => {
       {loading ? <MockupLoader /> : ""}
       {mockup && !loading ? (
         <a
-          className="button"
+          className="button btn btn-primary"
           href={mockup}
           download
           onClick={() => trackDownloadEvent(template)}
