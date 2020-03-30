@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Loader from "react-loader";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import ReactGA from "react-ga";
+
 import PopUp from "./PopUp";
 
 const MockupLoader = ({ text = "Generating preview..." }) => {
