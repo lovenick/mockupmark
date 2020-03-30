@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Loader from "react-loader";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ReactGA from "react-ga";
+import PopUp from "./PopUp";
 
 const MockupLoader = ({ text = "Generating preview..." }) => {
   return (
@@ -25,27 +26,16 @@ const MockupImage = ({ template, mockup, scrollPosition }) => {
       />
       {loading ? <MockupLoader /> : ""}
       {mockup && !loading ? (
-        <a
-          className="button btn btn-primary"
-          href={mockup}
-          download
-          onClick={() => trackDownloadEvent(template)}
-        >
-          Download
-        </a>
+        <PopUp 
+        mockup={mockup}
+        template={template}
+        />
+        
       ) : (
         ""
       )}
     </>
   );
-};
-
-const trackDownloadEvent = template => {
-  ReactGA.event({
-    category: "Mockup",
-    action: "Download",
-    label: template
-  });
 };
 
 export default MockupImage;
