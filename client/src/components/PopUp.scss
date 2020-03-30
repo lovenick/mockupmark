@@ -1,15 +1,16 @@
-$primary-color: #01a4a4;
+@import "../variables.scss";
 
-.modal-header{
-    background-color:$primary-color;
-    font-family: "Bebas Neue";
-    color:white;
-    .modal-title{
-        width:100%;
-        text-align:center;
-    }
+.modal-header {
+  background-color: $primary-color;
+  font-family: "Bebas Neue", sans-serif;
+  color: white;
+
+  .modal-title {
+    width: 100%;
+    text-align: center;
+  }
 }
 
-.modal-footer{
-    justify-content: center;
+.modal-footer {
+  justify-content: center;
 }

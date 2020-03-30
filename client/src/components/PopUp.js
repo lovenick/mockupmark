@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import ReactGA from "react-ga";
 
 import "./PopUp.scss";
