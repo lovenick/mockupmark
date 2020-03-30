@@ -25,15 +25,7 @@ const MockupImage = ({ template, mockup, scrollPosition }) => {
         scrollPosition={scrollPosition}
       />
       {loading ? <MockupLoader /> : ""}
-      {mockup && !loading ? (
-        <PopUp 
-        mockup={mockup}
-        template={template}
-        />
-        
-      ) : (
-        ""
-      )}
+      {mockup && !loading ? <PopUp mockup={mockup} template={template} /> : ""}
     </>
   );
 };
