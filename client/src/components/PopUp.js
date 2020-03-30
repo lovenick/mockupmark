@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReactGA from "react-ga";
+
+import "./PopUp.scss";
 
 const trackDownloadEvent = template => {
   ReactGA.event({
@@ -33,7 +35,12 @@ const PopUp = props => {
       >
         Download
       </a>
-      <Modal show={isOpen} onHide={hideModal}>
+      <Modal
+        show={isOpen}
+        onHide={hideModal}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
         <Modal.Header>
           <Modal.Title>Thank you for using Mockup Mark</Modal.Title>
         </Modal.Header>
@@ -49,12 +56,14 @@ const PopUp = props => {
             </a>{" "}
             or email us at{" "}
             <a href="mailto:hello@mockupmark.com" target="_blank">
-              hello@mockupmark.com
+               hello@mockupmark.com
             </a>
-          </p>
+          </p>          
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={hideModal}>Cancel</button>
+          <button className="button btn btn-primary" onClick={hideModal}>
+            Close
+          </button>
         </Modal.Footer>
       </Modal>
     </>

@@ -1,0 +1,15 @@
+$primary-color: #01a4a4;
+
+.modal-header{
+    background-color:$primary-color;
+    font-family: "Bebas Neue";
+    color:white;
+    .modal-title{
+        width:100%;
+        text-align:center;
+    }
+}
+
+.modal-footer{
+    justify-content: center;
+}
