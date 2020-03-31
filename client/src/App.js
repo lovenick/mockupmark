@@ -1,21 +1,16 @@
-import React, { useEffect } from "react";
-import ReactGA from "react-ga";
+import React from "react";
 
 import Head from "./components/Head";
+import Analytics from "./components/Analytics";
 import Navbar from "./components/Navbar";
 import ImageGrid from "./components/ImageGrid";
 import Footer from "./components/Footer";
 
 const App = () => {
-  useEffect(() => {
-    if (process.env.NODE_ENV === "production") {
-      ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID);
-      ReactGA.pageview(window.location.pathname + window.location.search);
-    }
-  }, []);
   return (
     <>
       <Head />
+      <Analytics />
       <Navbar />
       <main className="container">
         <h1 className="display-4">Mockup Mark</h1>
