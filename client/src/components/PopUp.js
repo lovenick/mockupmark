@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 
 import ReactGA from "react-ga";
+import Feedback from "./Feedback";
 
 import "./PopUp.scss";
 
@@ -45,25 +46,7 @@ const PopUp = props => {
           <Modal.Title>Thank you for using Mockup Mark</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p className="text-center">
-            Help us out by letting us know what you think of this prototype
-            <br />
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdmJy9iXNQBPWci3W1U8kZ-S3yBDZ2vPtSdu-NhI2c5rCCxXg/viewform?usp=sf_link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Link to survey
-            </a>{" "}
-            or email us at{" "}
-            <a
-              href="mailto:hello@mockupmark.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              hello@mockupmark.com
-            </a>
-          </p>
+          <Feedback />
         </Modal.Body>
         <Modal.Footer>
           <button className="button btn btn-primary" onClick={hideModal}>
