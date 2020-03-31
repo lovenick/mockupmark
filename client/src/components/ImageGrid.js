@@ -27,7 +27,9 @@ const ImageGrid = ({ scrollPosition }) => {
   }, []);
 
   const [mockups, setMockups] = useState([]);
+  const [uploading, setUploading] = useState(false);
   const onDrop = useCallback(acceptedFiles => {
+    setUploading(true);
     const [artwork] = acceptedFiles;
     const formData = new FormData();
     formData.append("artwork", artwork);
@@ -37,6 +39,7 @@ const ImageGrid = ({ scrollPosition }) => {
       })
       .then(response => {
         setMockups(response.data.images);
+        setUploading(false);
       });
     trackUploadEvent();
   }, []);
@@ -55,8 +58,20 @@ const ImageGrid = ({ scrollPosition }) => {
           type="button"
           className="btn btn-primary btn-block btn-lg"
           onClick={open}
+          disabled={uploading}
         >
-          Upload your design
+          {uploading ? (
+            <>
+              <span
+                className="spinner-grow spinner-grow-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>{" "}
+              Uploading...
+            </>
+          ) : (
+            "Upload your design"
+          )}
         </button>
         <div className="masonry-wrapper">
           <div className="masonry">
