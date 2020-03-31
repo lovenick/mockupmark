@@ -30,14 +30,14 @@ router.post("/", upload.single("artwork"), function(req, res, next) {
   const artwork = req.file.filename.slice(0, -4); // remove .png extension
 
   const images = [...MOCKUPS.keys()].map(
-    mockupId => `${req.originalUrl}/${artwork}/${mockupId}.jpg`
+    mockupId => `${req.originalUrl}/${artwork}/mockupmark-${mockupId}.jpg`
   );
 
   res.json({ images });
 });
 
 /* generate artwork mockup */
-router.get("/:artworkId/:mockupId.jpg", function(req, res, next) {
+router.get("/:artworkId/mockupmark-:mockupId.jpg", function(req, res, next) {
   const artwork = `uploads/${req.params.artworkId}.png`;
   const { template, mask, displacementMap, lightingMap, coordinates } = MOCKUPS[
     req.params.mockupId
