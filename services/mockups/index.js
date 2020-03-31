@@ -112,6 +112,13 @@ async function generateMockup(params) {
 
 var MOCKUPS = [
   {
+    template: __dirname + "/templates/3-template.jpg",
+    mask: __dirname + "/templates/3-mask.png",
+    displacementMap: __dirname + "/templates/3-displace.png",
+    lightingMap: __dirname + "/templates/3-lighting.png",
+    coordinates: [675, 735, 682, 1304, 1120, 1313, 1137, 743]
+  },
+  {
     template: __dirname + "/templates/1-template.jpg",
     mask: __dirname + "/templates/1-mask.png",
     displacementMap: __dirname + "/templates/1-displace.png",
@@ -126,18 +133,11 @@ var MOCKUPS = [
     coordinates: [501, 536, 505, 861, 799, 869, 816, 544]
   },
   {
-    template: __dirname + "/templates/3-template.jpg",
-    mask: __dirname + "/templates/3-mask.png",
-    displacementMap: __dirname + "/templates/3-displace.png",
-    lightingMap: __dirname + "/templates/3-lighting.png",
-    coordinates: [675, 735, 682, 1304, 1120, 1313, 1137, 743]
-  },
-  {
-    template: __dirname + "/templates/4-template.jpg",
-    mask: __dirname + "/templates/4-mask.png",
-    displacementMap: __dirname + "/templates/4-displace.png",
-    lightingMap: __dirname + "/templates/4-lighting.png",
-    coordinates: [953, 647, 973, 944, 1183, 945, 1184, 620]
+    template: __dirname + "/templates/21-template.jpg",
+    mask: __dirname + "/templates/21-mask.png",
+    displacementMap: __dirname + "/templates/21-displace.png",
+    lightingMap: __dirname + "/templates/21-lighting.png",
+    coordinates: [228, 1156, 288, 1900, 908, 1800, 736, 1100]
   },
   {
     template: __dirname + "/templates/5-template.jpg",
@@ -145,6 +145,13 @@ var MOCKUPS = [
     displacementMap: __dirname + "/templates/5-displace.png",
     lightingMap: __dirname + "/templates/5-lighting.png",
     coordinates: [572, 602, 563, 860, 755, 867, 763, 608]
+  },
+  {
+    template: __dirname + "/templates/10-template.jpg",
+    mask: __dirname + "/templates/10-mask.png",
+    displacementMap: __dirname + "/templates/10-displace.png",
+    lightingMap: __dirname + "/templates/10-lighting.png",
+    coordinates: [480, 1013, 486, 1370, 746, 1386, 758, 995]
   },
   {
     template: __dirname + "/templates/6-template.jpg",
@@ -161,53 +168,11 @@ var MOCKUPS = [
     coordinates: [420, 1068, 420, 1599, 818, 1599, 818, 1068]
   },
   {
-    template: __dirname + "/templates/8-template.jpg",
-    mask: __dirname + "/templates/8-mask.png",
-    displacementMap: __dirname + "/templates/8-displace.png",
-    lightingMap: __dirname + "/templates/8-lighting.png",
-    coordinates: [465, 1083, 465, 1522, 790, 1513, 781, 1081]
-  },
-  {
-    template: __dirname + "/templates/9-template.jpg",
-    mask: __dirname + "/templates/9-mask.png",
-    displacementMap: __dirname + "/templates/9-displace.png",
-    lightingMap: __dirname + "/templates/9-lighting.png",
-    coordinates: [599, 756, 504, 1068, 777, 1094, 871, 777]
-  },
-  {
-    template: __dirname + "/templates/10-template.jpg",
-    mask: __dirname + "/templates/10-mask.png",
-    displacementMap: __dirname + "/templates/10-displace.png",
-    lightingMap: __dirname + "/templates/10-lighting.png",
-    coordinates: [480, 1013, 486, 1370, 746, 1386, 758, 995]
-  },
-  {
-    template: __dirname + "/templates/11-template.jpg",
-    mask: __dirname + "/templates/11-mask.png",
-    displacementMap: __dirname + "/templates/11-displace.png",
-    lightingMap: __dirname + "/templates/11-lighting.png",
-    coordinates: [434, 639, 449, 1062, 700, 1062, 716, 635]
-  },
-  {
-    template: __dirname + "/templates/13-template.jpg",
-    mask: __dirname + "/templates/13-mask.png",
-    displacementMap: __dirname + "/templates/13-displace.png",
-    lightingMap: __dirname + "/templates/13-lighting.png",
-    coordinates: [424, 648, 405, 1156, 783, 1165, 816, 658]
-  },
-  {
     template: __dirname + "/templates/16-template.jpg",
     mask: __dirname + "/templates/16-mask.png",
     displacementMap: __dirname + "/templates/16-displace.png",
     lightingMap: __dirname + "/templates/16-lighting.png",
     coordinates: [372, 738, 404, 1286, 733, 1288, 726, 718]
-  },
-  {
-    template: __dirname + "/templates/17-template.jpg",
-    mask: __dirname + "/templates/17-mask.png",
-    displacementMap: __dirname + "/templates/17-displace.png",
-    lightingMap: __dirname + "/templates/17-lighting.png",
-    coordinates: [513, 565, 521, 795, 695, 789, 681, 562]
   },
   {
     template: __dirname + "/templates/18-template.jpg",
@@ -217,11 +182,53 @@ var MOCKUPS = [
     coordinates: [249, 930, 300, 1458, 721, 1437, 666, 892]
   },
   {
+    template: __dirname + "/templates/17-template.jpg",
+    mask: __dirname + "/templates/17-mask.png",
+    displacementMap: __dirname + "/templates/17-displace.png",
+    lightingMap: __dirname + "/templates/17-lighting.png",
+    coordinates: [513, 565, 521, 795, 695, 789, 681, 562]
+  },
+  // {
+  //   template: __dirname + "/templates/8-template.jpg",
+  //   mask: __dirname + "/templates/8-mask.png",
+  //   displacementMap: __dirname + "/templates/8-displace.png",
+  //   lightingMap: __dirname + "/templates/8-lighting.png",
+  //   coordinates: [465, 1083, 465, 1522, 790, 1513, 781, 1081]
+  // },
+  {
+    template: __dirname + "/templates/9-template.jpg",
+    mask: __dirname + "/templates/9-mask.png",
+    displacementMap: __dirname + "/templates/9-displace.png",
+    lightingMap: __dirname + "/templates/9-lighting.png",
+    coordinates: [599, 756, 504, 1068, 777, 1094, 871, 777]
+  },
+  {
+    template: __dirname + "/templates/22-template.jpg",
+    mask: __dirname + "/templates/22-mask.png",
+    displacementMap: __dirname + "/templates/22-displace.png",
+    lightingMap: __dirname + "/templates/22-lighting.png",
+    coordinates: [520, 772, 626, 1152, 926, 1140, 848, 722]
+  },
+  {
     template: __dirname + "/templates/19-template.jpg",
     mask: __dirname + "/templates/19-mask.png",
     displacementMap: __dirname + "/templates/19-displace.png",
     lightingMap: __dirname + "/templates/19-lighting.png",
     coordinates: [490, 730, 489, 1216, 836, 1202, 820, 727]
+  },
+  {
+    template: __dirname + "/templates/13-template.jpg",
+    mask: __dirname + "/templates/13-mask.png",
+    displacementMap: __dirname + "/templates/13-displace.png",
+    lightingMap: __dirname + "/templates/13-lighting.png",
+    coordinates: [424, 648, 405, 1156, 783, 1165, 816, 658]
+  },
+  {
+    template: __dirname + "/templates/11-template.jpg",
+    mask: __dirname + "/templates/11-mask.png",
+    displacementMap: __dirname + "/templates/11-displace.png",
+    lightingMap: __dirname + "/templates/11-lighting.png",
+    coordinates: [434, 639, 449, 1062, 700, 1062, 716, 635]
   },
   {
     template: __dirname + "/templates/20-template.jpg",
@@ -231,18 +238,11 @@ var MOCKUPS = [
     coordinates: [358, 616, 377, 1146, 755, 1166, 742, 603]
   },
   {
-    template: __dirname + "/templates/21-template.jpg",
-    mask: __dirname + "/templates/21-mask.png",
-    displacementMap: __dirname + "/templates/21-displace.png",
-    lightingMap: __dirname + "/templates/21-lighting.png",
-    coordinates: [228, 1156, 288, 1900, 908, 1800, 736, 1100]
-  },
-  {
-    template: __dirname + "/templates/22-template.jpg",
-    mask: __dirname + "/templates/22-mask.png",
-    displacementMap: __dirname + "/templates/22-displace.png",
-    lightingMap: __dirname + "/templates/22-lighting.png",
-    coordinates: [520, 772, 626, 1152, 926, 1140, 848, 722]
+    template: __dirname + "/templates/4-template.jpg",
+    mask: __dirname + "/templates/4-mask.png",
+    displacementMap: __dirname + "/templates/4-displace.png",
+    lightingMap: __dirname + "/templates/4-lighting.png",
+    coordinates: [953, 647, 973, 944, 1183, 945, 1184, 620]
   }
 ];
 
