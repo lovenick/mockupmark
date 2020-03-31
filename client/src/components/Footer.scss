@@ -1,5 +1,7 @@
+@import "../variables.scss";
+
 footer {
-  background-color: #01a4a4;
+  background-color: $primary-color;
   color: white;
   margin-top: 2em;
   padding: 0.5em 0;

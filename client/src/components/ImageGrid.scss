@@ -1,4 +1,4 @@
-$primary-color: #01a4a4;
+@import "../variables.scss";
 
 @keyframes LoadingBackground {
   0% {
@@ -9,17 +9,6 @@ $primary-color: #01a4a4;
   }
   100% {
     background-position: 0% 50%;
-  }
-}
-
-.btn-primary {
-  background-color: $primary-color;
-  border-color: $primary-color;
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: darken($primary-color, 10%);
-    border-color: darken($primary-color, 10%);
   }
 }
 

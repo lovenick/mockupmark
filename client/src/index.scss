@@ -1,7 +1,16 @@
+@import "./variables.scss";
+
+// change the theme
+$theme-colors: (
+  "primary": $primary-color
+);
+
+// Import Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap.scss";
+
 body {
   margin: 0;
   padding: 0;
-  font-family: "Bebas Neue", -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

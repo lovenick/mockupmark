@@ -1,0 +1,16 @@
+@import "../variables.scss";
+
+.modal-header {
+  background-color: $primary-color;
+  font-family: "Bebas Neue", sans-serif;
+  color: white;
+
+  .modal-title {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.modal-footer {
+  justify-content: center;
+}
