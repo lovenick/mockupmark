@@ -74,6 +74,7 @@
           text-align: center;
           opacity: 0;
           transition: opacity 0.35s ease;
+          border-radius: 0;
         }
         &:hover .button {
           opacity: 1;
