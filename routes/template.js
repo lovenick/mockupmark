@@ -7,8 +7,8 @@ router.get("/", function(req, res, next) {
   res.json({ templates });
 });
 
-router.get("/:mockupId.jpg", function(req, res, next) {
-  const mockup = MOCKUPS[parseInt(req.params.mockupId)];
+router.get("/:templateId.jpg", function(req, res, next) {
+  const mockup = MOCKUPS[req.params.templateId];
   if (mockup) {
     res.sendFile(mockup.template);
   } else {

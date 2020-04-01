@@ -29,18 +29,18 @@ const { generateMockup, MOCKUPS } = require("../services/mockups");
 router.post("/", upload.single("artwork"), function(req, res, next) {
   const artwork = req.file.filename.slice(0, -4); // remove .png extension
 
-  const images = [...MOCKUPS.keys()].map(
-    mockupId => `${req.originalUrl}/${artwork}/mockupmark-${mockupId}.jpg`
+  const images = Object.keys(MOCKUPS).map(
+    templateId => `${req.originalUrl}/${artwork}/${templateId}.jpg`
   );
 
   res.json({ images });
 });
 
 /* generate artwork mockup */
-router.get("/:artworkId/mockupmark-:mockupId.jpg", function(req, res, next) {
+router.get("/:artworkId/:templateId.jpg", function(req, res, next) {
   const artwork = `uploads/${req.params.artworkId}.png`;
   const { template, mask, displacementMap, lightingMap, coordinates } = MOCKUPS[
-    req.params.mockupId
+    req.params.templateId
   ];
   const out = tempy.file({ extension: "jpg" });
   generateMockup({
