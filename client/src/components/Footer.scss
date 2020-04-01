@@ -2,11 +2,21 @@
 
 footer {
   background-color: $primary-color;
-  color: white;
+  color: #efefef;
   margin-top: 2em;
   padding: 0.5em 0;
-  text-align: right;
-  p {
-    margin-bottom: 0;
+  a {
+    color: #efefef;
+    &:hover {
+      color: white;
+    }
+  }
+
+  .container {
+    .social-media {
+      & > a {
+        font-size: 2rem;
+      }
+    }
   }
 }
