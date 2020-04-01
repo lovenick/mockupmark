@@ -4,6 +4,7 @@ import { useDropzone } from "react-dropzone";
 import Loader from "react-loader";
 import { trackWindowScroll } from "react-lazy-load-image-component";
 import ReactGA from "react-ga";
+import FacebookPixel from "react-facebook-pixel";
 
 import api from "../api";
 import MockupImage from "./MockupImage";
@@ -14,6 +15,7 @@ const trackUploadEvent = () => {
     category: "Mockup",
     action: "Upload"
   });
+  FacebookPixel.trackCustom("Upload");
 };
 
 const ImageGrid = ({ scrollPosition }) => {

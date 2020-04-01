@@ -2,6 +2,8 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 
 import ReactGA from "react-ga";
+import FacebookPixel from "react-facebook-pixel";
+
 import Feedback from "./Feedback";
 
 import "./PopUp.scss";
@@ -12,6 +14,7 @@ const trackDownloadEvent = template => {
     action: "Download",
     label: template
   });
+  FacebookPixel.trackCustom("Download", { template });
 };
 
 const PopUp = props => {
