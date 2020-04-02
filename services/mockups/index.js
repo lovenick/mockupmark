@@ -151,13 +151,13 @@ var MOCKUPS = {
     adjustmentMap: __dirname + "/templates/1-adjust.jpg",
     coordinates: [490, 810, 514, 1108, 738, 1098, 734, 799]
   },
-  "tshirt-2": {
-    template: __dirname + "/templates/2-template.jpg",
-    mask: __dirname + "/templates/2-mask.png",
-    displacementMap: __dirname + "/templates/2-displace.png",
-    lightingMap: __dirname + "/templates/2-lighting.png",
-    adjustmentMap: __dirname + "/templates/2-adjust.jpg",
-    coordinates: [501, 536, 505, 861, 799, 869, 816, 544]
+  "tshirt-20": {
+    template: __dirname + "/templates/20-template.jpg",
+    mask: __dirname + "/templates/20-mask.png",
+    displacementMap: __dirname + "/templates/20-displace.png",
+    lightingMap: __dirname + "/templates/20-lighting.png",
+    adjustmentMap: __dirname + "/templates/20-adjust.jpg",
+    coordinates: [358, 616, 377, 1146, 755, 1166, 742, 603]
   },
   "tshirt-21": {
     template: __dirname + "/templates/21-template.jpg",
@@ -174,6 +174,14 @@ var MOCKUPS = {
     lightingMap: __dirname + "/templates/5-lighting.png",
     adjustmentMap: __dirname + "/templates/5-adjust.jpg",
     coordinates: [572, 602, 563, 860, 755, 867, 763, 608]
+  },
+  "tshirt-23": {
+    template: __dirname + "/templates/23-template.jpg",
+    mask: __dirname + "/templates/23-mask.png",
+    displacementMap: __dirname + "/templates/23-displace.png",
+    lightingMap: __dirname + "/templates/23-lighting.png",
+    adjustmentMap: __dirname + "/templates/23-adjust.jpg",
+    coordinates: [519, 978, 412, 1347, 750, 1405, 875, 1014]
   },
   "tshirt-10": {
     template: __dirname + "/templates/10-template.jpg",
@@ -223,14 +231,6 @@ var MOCKUPS = {
     adjustmentMap: __dirname + "/templates/17-adjust.jpg",
     coordinates: [513, 565, 521, 795, 695, 789, 681, 562]
   },
-  // "tshirt-8": {
-  //   template: __dirname + "/templates/8-template.jpg",
-  //   mask: __dirname + "/templates/8-mask.png",
-  //   displacementMap: __dirname + "/templates/8-displace.png",
-  //   lightingMap: __dirname + "/templates/8-lighting.png",
-  //   adjustmentMap: __dirname + "/templates/8-adjust.jpg",
-  //   coordinates: [465, 1083, 465, 1522, 790, 1513, 781, 1081]
-  // },
   "tshirt-9": {
     template: __dirname + "/templates/9-template.jpg",
     mask: __dirname + "/templates/9-mask.png",
@@ -246,6 +246,14 @@ var MOCKUPS = {
     lightingMap: __dirname + "/templates/22-lighting.png",
     adjustmentMap: __dirname + "/templates/22-adjust.jpg",
     coordinates: [520, 772, 626, 1152, 926, 1140, 848, 722]
+  },
+  "tshirt-2": {
+    template: __dirname + "/templates/2-template.jpg",
+    mask: __dirname + "/templates/2-mask.png",
+    displacementMap: __dirname + "/templates/2-displace.png",
+    lightingMap: __dirname + "/templates/2-lighting.png",
+    adjustmentMap: __dirname + "/templates/2-adjust.jpg",
+    coordinates: [501, 536, 505, 861, 799, 869, 816, 544]
   },
   "tshirt-19": {
     template: __dirname + "/templates/19-template.jpg",
@@ -271,14 +279,6 @@ var MOCKUPS = {
     adjustmentMap: __dirname + "/templates/11-adjust.jpg",
     coordinates: [434, 639, 449, 1062, 700, 1062, 716, 635]
   },
-  "tshirt-20": {
-    template: __dirname + "/templates/20-template.jpg",
-    mask: __dirname + "/templates/20-mask.png",
-    displacementMap: __dirname + "/templates/20-displace.png",
-    lightingMap: __dirname + "/templates/20-lighting.png",
-    adjustmentMap: __dirname + "/templates/20-adjust.jpg",
-    coordinates: [358, 616, 377, 1146, 755, 1166, 742, 603]
-  },
   "tshirt-4": {
     template: __dirname + "/templates/4-template.jpg",
     mask: __dirname + "/templates/4-mask.png",
@@ -286,6 +286,14 @@ var MOCKUPS = {
     lightingMap: __dirname + "/templates/4-lighting.png",
     adjustmentMap: __dirname + "/templates/4-adjust.jpg",
     coordinates: [953, 647, 973, 944, 1183, 945, 1184, 620]
+  },
+  "tshirt-8": {
+    template: __dirname + "/templates/8-template.jpg",
+    mask: __dirname + "/templates/8-mask.png",
+    displacementMap: __dirname + "/templates/8-displace.png",
+    lightingMap: __dirname + "/templates/8-lighting.png",
+    adjustmentMap: __dirname + "/templates/8-adjust.jpg",
+    coordinates: [465, 1083, 465, 1522, 790, 1513, 781, 1081]
   }
 };
 
