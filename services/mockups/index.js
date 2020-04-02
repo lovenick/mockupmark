@@ -26,7 +26,13 @@ async function generateNormalizedTemplateMap(params) {
 }
 
 async function generateLightingMap(params) {
-  await generateNormalizedTemplateMap(params);
+  const { template, mask, out } = params;
+
+  const tmp = tempy.file({ extension: "mpc" });
+  await generateNormalizedTemplateMap({ template, mask, out: tmp });
+
+  const removeShadows = `convert ${tmp} \\( -clone 0 -fill grey50 -colorize 100 \\) -compose lighten -composite ${out}`;
+  await exec(removeShadows);
 }
 
 async function generateDisplacementMap(params) {
@@ -40,7 +46,7 @@ async function generateDisplacementMap(params) {
 }
 
 async function generateColorAdjustmentMap(params) {
-  const { template, mask, out, color = "white" } = params;
+  const { template, mask, out, color = "#f1f1f1" } = params;
 
   const adjustColor = `convert ${template} \\( -clone 0 -fill "${color}" -colorize 100 \\) ${mask} -compose DivideSrc -composite ${out}`;
   await exec(adjustColor);
@@ -89,7 +95,7 @@ async function addDisplacement(params) {
 // convert artwork_displaced.png \( -clone 0 masked_template_corrected.png -compose hardlight -composite \) +swap -compose copy_opacity -composite artwork_final.png
 async function addHighlights(params) {
   const { artwork, lightingMap, out } = params;
-  const { mode = "lineardodge" } = params;
+  const { mode = "hardlight" } = params;
 
   const highlight = `convert ${artwork} \\( -clone 0 ${lightingMap} -compose ${mode} -composite \\) +swap -compose CopyOpacity -composite ${out}`;
   await exec(highlight);
