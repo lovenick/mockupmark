@@ -22,7 +22,7 @@ const Footer = () => {
               <FontAwesomeIcon icon={faFacebook} title="Facebook" />
             </a>
             <a
-              href="https://www.instagram.com/mockupmark/"
+              href="https://www.instagram.com/mockup_mark/"
               target="_blank"
               rel="noopener noreferrer"
               className="d-inline-block"
