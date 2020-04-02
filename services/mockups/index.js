@@ -89,7 +89,7 @@ async function addDisplacement(params) {
 // convert artwork_displaced.png \( -clone 0 masked_template_corrected.png -compose hardlight -composite \) +swap -compose copy_opacity -composite artwork_final.png
 async function addHighlights(params) {
   const { artwork, lightingMap, out } = params;
-  const { mode = "softlight" } = params;
+  const { mode = "lineardodge" } = params;
 
   const highlight = `convert ${artwork} \\( -clone 0 ${lightingMap} -compose ${mode} -composite \\) +swap -compose CopyOpacity -composite ${out}`;
   await exec(highlight);
