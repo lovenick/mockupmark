@@ -39,6 +39,13 @@ async function generateDisplacementMap(params) {
   await exec(`convert ${tmp} -blur 0x${blur} ${out}`);
 }
 
+async function generateColorAdjustmentMap(params) {
+  const { template, mask, out, color = "white" } = params;
+
+  const adjustColor = `convert ${template} \\( -clone 0 -fill "${color}" -colorize 100 \\) ${mask} -compose DivideSrc -composite ${out}`;
+  await exec(adjustColor);
+}
+
 async function resize(params) {
   const { artwork, out } = params;
   const { size = 400 } = params;
@@ -66,7 +73,7 @@ async function perspectiveTransform(params) {
 
 async function setBackgroundColor(params) {
   const { artwork, color = "transparent", out } = params;
-  const setBackground = `convert ${artwork} -background ${color} -alpha remove ${out}`;
+  const setBackground = `convert ${artwork} -background "${color}" -alpha remove ${out}`;
   await exec(setBackground);
 }
 
@@ -82,21 +89,37 @@ async function addDisplacement(params) {
 // convert artwork_displaced.png \( -clone 0 masked_template_corrected.png -compose hardlight -composite \) +swap -compose copy_opacity -composite artwork_final.png
 async function addHighlights(params) {
   const { artwork, lightingMap, out } = params;
-  const { mode = "hardlight" } = params;
+  const { mode = "softlight" } = params;
 
   const highlight = `convert ${artwork} \\( -clone 0 ${lightingMap} -compose ${mode} -composite \\) +swap -compose CopyOpacity -composite ${out}`;
   await exec(highlight);
 }
 
+async function adjustColors(params) {
+  const { artwork, adjustmentMap, out } = params;
+
+  const adjust = `convert ${artwork} \\( -clone 0 ${adjustmentMap} -compose multiply -composite \\) +swap -compose CopyOpacity -composite ${out}`;
+  await exec(adjust);
+}
+
 async function composeArtwork(params) {
   const { template, artwork, mask, out } = params;
-  const compose = `convert ${template} ${artwork} ${mask} -compose over -composite ${out}`;
+  const { mode = "over" } = params;
+  const compose = `convert ${template} ${artwork} ${mask} -compose ${mode} -composite ${out}`;
   await exec(compose);
 }
 
 // convert template.jpg -compose multiply artwork_final.png -composite mockup.jpg
 async function generateMockup(params) {
-  const { template, artwork, mask, displacementMap, lightingMap, out } = params;
+  const {
+    template,
+    artwork,
+    mask,
+    displacementMap,
+    lightingMap,
+    adjustmentMap,
+    out
+  } = params;
   const { coordinates } = params;
 
   const tmp = tempy.file({ extension: "mpc" });
@@ -107,6 +130,7 @@ async function generateMockup(params) {
   // await setBackgroundColor({ artwork: tmp, color: "black", out: tmp });
   await addDisplacement({ artwork: tmp, displacementMap, out: tmp });
   await addHighlights({ artwork: tmp, lightingMap, out: tmp });
+  await adjustColors({ artwork: tmp, adjustmentMap, out: tmp });
   await composeArtwork({ artwork: tmp, template, mask, out });
 }
 
@@ -116,6 +140,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/3-mask.png",
     displacementMap: __dirname + "/templates/3-displace.png",
     lightingMap: __dirname + "/templates/3-lighting.png",
+    adjustmentMap: __dirname + "/templates/3-adjust.jpg",
     coordinates: [675, 735, 682, 1304, 1120, 1313, 1137, 743]
   },
   "tshirt-1": {
@@ -123,6 +148,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/1-mask.png",
     displacementMap: __dirname + "/templates/1-displace.png",
     lightingMap: __dirname + "/templates/1-lighting.png",
+    adjustmentMap: __dirname + "/templates/1-adjust.jpg",
     coordinates: [490, 810, 514, 1108, 738, 1098, 734, 799]
   },
   "tshirt-2": {
@@ -130,6 +156,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/2-mask.png",
     displacementMap: __dirname + "/templates/2-displace.png",
     lightingMap: __dirname + "/templates/2-lighting.png",
+    adjustmentMap: __dirname + "/templates/2-adjust.jpg",
     coordinates: [501, 536, 505, 861, 799, 869, 816, 544]
   },
   "tshirt-21": {
@@ -137,6 +164,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/21-mask.png",
     displacementMap: __dirname + "/templates/21-displace.png",
     lightingMap: __dirname + "/templates/21-lighting.png",
+    adjustmentMap: __dirname + "/templates/21-adjust.jpg",
     coordinates: [228, 1156, 288, 1900, 908, 1800, 736, 1100]
   },
   "tshirt-5": {
@@ -144,6 +172,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/5-mask.png",
     displacementMap: __dirname + "/templates/5-displace.png",
     lightingMap: __dirname + "/templates/5-lighting.png",
+    adjustmentMap: __dirname + "/templates/5-adjust.jpg",
     coordinates: [572, 602, 563, 860, 755, 867, 763, 608]
   },
   "tshirt-10": {
@@ -151,6 +180,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/10-mask.png",
     displacementMap: __dirname + "/templates/10-displace.png",
     lightingMap: __dirname + "/templates/10-lighting.png",
+    adjustmentMap: __dirname + "/templates/10-adjust.jpg",
     coordinates: [480, 1013, 486, 1370, 746, 1386, 758, 995]
   },
   "tshirt-6": {
@@ -158,6 +188,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/6-mask.png",
     displacementMap: __dirname + "/templates/6-displace.png",
     lightingMap: __dirname + "/templates/6-lighting.png",
+    adjustmentMap: __dirname + "/templates/6-adjust.jpg",
     coordinates: [352, 646, 459, 855, 616, 774, 509, 565]
   },
   "tshirt-7": {
@@ -165,6 +196,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/7-mask.png",
     displacementMap: __dirname + "/templates/7-displace.png",
     lightingMap: __dirname + "/templates/7-lighting.png",
+    adjustmentMap: __dirname + "/templates/7-adjust.jpg",
     coordinates: [420, 1068, 420, 1599, 818, 1599, 818, 1068]
   },
   "tshirt-16": {
@@ -172,6 +204,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/16-mask.png",
     displacementMap: __dirname + "/templates/16-displace.png",
     lightingMap: __dirname + "/templates/16-lighting.png",
+    adjustmentMap: __dirname + "/templates/16-adjust.jpg",
     coordinates: [372, 738, 404, 1286, 733, 1288, 726, 718]
   },
   "tshirt-18": {
@@ -179,6 +212,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/18-mask.png",
     displacementMap: __dirname + "/templates/18-displace.png",
     lightingMap: __dirname + "/templates/18-lighting.png",
+    adjustmentMap: __dirname + "/templates/18-adjust.jpg",
     coordinates: [249, 930, 300, 1458, 721, 1437, 666, 892]
   },
   "tshirt-17": {
@@ -186,6 +220,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/17-mask.png",
     displacementMap: __dirname + "/templates/17-displace.png",
     lightingMap: __dirname + "/templates/17-lighting.png",
+    adjustmentMap: __dirname + "/templates/17-adjust.jpg",
     coordinates: [513, 565, 521, 795, 695, 789, 681, 562]
   },
   // "tshirt-8": {
@@ -193,6 +228,7 @@ var MOCKUPS = {
   //   mask: __dirname + "/templates/8-mask.png",
   //   displacementMap: __dirname + "/templates/8-displace.png",
   //   lightingMap: __dirname + "/templates/8-lighting.png",
+  //   adjustmentMap: __dirname + "/templates/8-adjust.jpg",
   //   coordinates: [465, 1083, 465, 1522, 790, 1513, 781, 1081]
   // },
   "tshirt-9": {
@@ -200,6 +236,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/9-mask.png",
     displacementMap: __dirname + "/templates/9-displace.png",
     lightingMap: __dirname + "/templates/9-lighting.png",
+    adjustmentMap: __dirname + "/templates/9-adjust.jpg",
     coordinates: [599, 756, 504, 1068, 777, 1094, 871, 777]
   },
   "tshirt-22": {
@@ -207,6 +244,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/22-mask.png",
     displacementMap: __dirname + "/templates/22-displace.png",
     lightingMap: __dirname + "/templates/22-lighting.png",
+    adjustmentMap: __dirname + "/templates/22-adjust.jpg",
     coordinates: [520, 772, 626, 1152, 926, 1140, 848, 722]
   },
   "tshirt-19": {
@@ -214,6 +252,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/19-mask.png",
     displacementMap: __dirname + "/templates/19-displace.png",
     lightingMap: __dirname + "/templates/19-lighting.png",
+    adjustmentMap: __dirname + "/templates/19-adjust.jpg",
     coordinates: [490, 730, 489, 1216, 836, 1202, 820, 727]
   },
   "tshirt-13": {
@@ -221,6 +260,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/13-mask.png",
     displacementMap: __dirname + "/templates/13-displace.png",
     lightingMap: __dirname + "/templates/13-lighting.png",
+    adjustmentMap: __dirname + "/templates/13-adjust.jpg",
     coordinates: [424, 648, 405, 1156, 783, 1165, 816, 658]
   },
   "tshirt-11": {
@@ -228,6 +268,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/11-mask.png",
     displacementMap: __dirname + "/templates/11-displace.png",
     lightingMap: __dirname + "/templates/11-lighting.png",
+    adjustmentMap: __dirname + "/templates/11-adjust.jpg",
     coordinates: [434, 639, 449, 1062, 700, 1062, 716, 635]
   },
   "tshirt-20": {
@@ -235,6 +276,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/20-mask.png",
     displacementMap: __dirname + "/templates/20-displace.png",
     lightingMap: __dirname + "/templates/20-lighting.png",
+    adjustmentMap: __dirname + "/templates/20-adjust.jpg",
     coordinates: [358, 616, 377, 1146, 755, 1166, 742, 603]
   },
   "tshirt-4": {
@@ -242,6 +284,7 @@ var MOCKUPS = {
     mask: __dirname + "/templates/4-mask.png",
     displacementMap: __dirname + "/templates/4-displace.png",
     lightingMap: __dirname + "/templates/4-lighting.png",
+    adjustmentMap: __dirname + "/templates/4-adjust.jpg",
     coordinates: [953, 647, 973, 944, 1183, 945, 1184, 620]
   }
 };

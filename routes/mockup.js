@@ -39,9 +39,14 @@ router.post("/", upload.single("artwork"), function(req, res, next) {
 /* generate artwork mockup */
 router.get("/:artworkId/:templateId.jpg", function(req, res, next) {
   const artwork = `uploads/${req.params.artworkId}.png`;
-  const { template, mask, displacementMap, lightingMap, coordinates } = MOCKUPS[
-    req.params.templateId
-  ];
+  const {
+    template,
+    mask,
+    displacementMap,
+    lightingMap,
+    adjustmentMap,
+    coordinates
+  } = MOCKUPS[req.params.templateId];
   const out = tempy.file({ extension: "jpg" });
   generateMockup({
     artwork,
@@ -49,6 +54,7 @@ router.get("/:artworkId/:templateId.jpg", function(req, res, next) {
     mask,
     displacementMap,
     lightingMap,
+    adjustmentMap,
     coordinates,
     out
   }).then(() => res.sendFile(out));
