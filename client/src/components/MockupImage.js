@@ -3,6 +3,7 @@ import Loader from "react-loader";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import PopUp from "./PopUp";
+import "./MockupImage.scss";
 
 const MockupLoader = ({ text = "Generating preview..." }) => {
   return (
@@ -16,7 +17,7 @@ const MockupLoader = ({ text = "Generating preview..." }) => {
 const MockupImage = ({ template, mockup, scrollPosition }) => {
   const [loading, setLoading] = useState(true);
   return (
-    <>
+    <div className="mockup-image">
       <LazyLoadImage
         alt=""
         src={mockup}
@@ -26,7 +27,7 @@ const MockupImage = ({ template, mockup, scrollPosition }) => {
       />
       {loading ? <MockupLoader /> : ""}
       {mockup && !loading ? <PopUp mockup={mockup} template={template} /> : ""}
-    </>
+    </div>
   );
 };
 
