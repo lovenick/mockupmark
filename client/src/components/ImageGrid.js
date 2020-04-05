@@ -9,6 +9,7 @@ import FacebookPixel from "react-facebook-pixel";
 import api from "../api";
 import MockupImage from "./MockupImage";
 import "./ImageGrid.scss";
+import PopUp from "./PopUp";
 
 const trackUploadEvent = () => {
   ReactGA.event({
@@ -16,6 +17,15 @@ const trackUploadEvent = () => {
     action: "Upload"
   });
   FacebookPixel.trackCustom("Upload");
+};
+
+const trackDownloadEvent = template => {
+  ReactGA.event({
+    category: "Mockup",
+    action: "Download",
+    label: template
+  });
+  FacebookPixel.trackCustom("Download", { template });
 };
 
 const ImageGrid = ({ scrollPosition }) => {
@@ -52,57 +62,67 @@ const ImageGrid = ({ scrollPosition }) => {
     noClick: true
   });
 
+  const [popupIsOpen, setPopupIsOpen] = useState(false);
+  const onDownload = template => {
+    trackDownloadEvent(template);
+    setPopupIsOpen(true);
+  };
+
   return (
-    <Loader loaded={templates.length > 0}>
-      <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
-        <button
-          type="button"
-          className="btn btn-primary btn-block btn-lg"
-          onClick={open}
-          disabled={uploading}
-        >
-          {uploading ? (
-            <>
-              <span
-                className="spinner-grow spinner-grow-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>{" "}
-              Uploading...
-            </>
-          ) : (
-            "Upload your design"
-          )}
-        </button>
-        <div className="masonry-wrapper">
-          <div className="masonry">
-            {templates.map((template, index) => {
-              const mockup = mockups[index];
-              return (
-                <div key={template} className="masonry-item">
-                  <div className="masonry-content">
-                    <div className="masonry-image">
-                      <img src={template} alt="" />
-                      {mockup ? (
-                        <MockupImage
-                          key={mockup}
-                          template={template}
-                          mockup={mockup}
-                          scrollPosition={scrollPosition}
-                        />
-                      ) : (
-                        ""
-                      )}
+    <>
+      <Loader loaded={templates.length > 0}>
+        <div {...getRootProps({ className: "dropzone" })}>
+          <input {...getInputProps()} />
+          <button
+            type="button"
+            className="btn btn-primary btn-block btn-lg"
+            onClick={open}
+            disabled={uploading}
+          >
+            {uploading ? (
+              <>
+                <span
+                  className="spinner-grow spinner-grow-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>{" "}
+                Uploading...
+              </>
+            ) : (
+              "Upload your design"
+            )}
+          </button>
+          <div className="masonry-wrapper">
+            <div className="masonry">
+              {templates.map((template, index) => {
+                const mockup = mockups[index];
+                return (
+                  <div key={template} className="masonry-item">
+                    <div className="masonry-content">
+                      <div className="masonry-image">
+                        <img src={template} alt="" />
+                        {mockup ? (
+                          <MockupImage
+                            key={mockup}
+                            template={template}
+                            mockup={mockup}
+                            scrollPosition={scrollPosition}
+                            onDownload={onDownload}
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
-    </Loader>
+      </Loader>
+      <PopUp isOpen={popupIsOpen} onClose={() => setPopupIsOpen(false)} />
+    </>
   );
 };
 
