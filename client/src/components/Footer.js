@@ -1,5 +1,4 @@
 import React from "react";
-import Feedback from "./Feedback";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
@@ -8,7 +7,24 @@ import "./Footer.scss";
 const Footer = () => {
   return (
     <div style={{ marginTop: "1em" }}>
-      <Feedback />
+      <div className="container" id="feedback">
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdmJy9iXNQBPWci3W1U8kZ-S3yBDZ2vPtSdu-NhI2c5rCCxXg/viewform?usp=sf_link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Fill in the survey
+        </a>{" "}
+        or email us at{" "}
+        <a
+          href="mailto:hello@mockupmark.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          hello@mockupmark.com
+        </a>
+      </div>
+
       <footer>
         <div className="container d-flex flex-column flex-sm-row align-items-center">
           <div className="social-media flex-grow-1 d-flex align-items-center">

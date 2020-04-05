@@ -49,12 +49,20 @@ const PopUp = props => {
           <Modal.Title>Thank you for using Mockup Mark</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Feedback />
+          <p className="text-center">
+            Help us out by letting us know what you think of this prototype
+          </p>
         </Modal.Body>
         <Modal.Footer>
-          <button className="button btn btn-primary" onClick={hideModal}>
-            Close
-          </button>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdmJy9iXNQBPWci3W1U8kZ-S3yBDZ2vPtSdu-NhI2c5rCCxXg/viewform?usp=sf_link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="button btn btn-primary" onClick={hideModal}>
+              Close & Fill in the survey
+            </button>
+          </a>
         </Modal.Footer>
       </Modal>
     </>
