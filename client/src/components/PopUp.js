@@ -3,10 +3,10 @@ import Modal from "react-bootstrap/Modal";
 
 import "./PopUp.scss";
 
-const PopUp = ({ isOpen, onClose }) => {
+const PopUp = ({ isOpen, onClose, onVisit, visitedSurvey }) => {
   return (
     <Modal
-      show={isOpen}
+      show={isOpen && !visitedSurvey}
       onHide={onClose}
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -25,7 +25,13 @@ const PopUp = ({ isOpen, onClose }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <button className="button btn btn-primary" onClick={onClose}>
+          <button
+            className="button btn btn-primary"
+            onClick={() => {
+              onClose();
+              onVisit();
+            }}
+          >
             Close &amp; Fill in the survey
           </button>
         </a>

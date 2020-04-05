@@ -59,11 +59,13 @@ const ImageGrid = ({ scrollPosition }) => {
     onDrop,
     accept: "image/*",
     multiple: false,
-    noClick: true
+    noClick: true,
   });
 
   const [popupIsOpen, setPopupIsOpen] = useState(false);
-  const onDownload = template => {
+  const [visitedSurvey, setVisitedSurvey] = useState(false);
+
+  const onDownload = (template) => {
     trackDownloadEvent(template);
     setPopupIsOpen(true);
   };
@@ -121,7 +123,12 @@ const ImageGrid = ({ scrollPosition }) => {
           </div>
         </div>
       </Loader>
-      <PopUp isOpen={popupIsOpen} onClose={() => setPopupIsOpen(false)} />
+      <PopUp
+        isOpen={popupIsOpen}
+        visitedSurvey={visitedSurvey}
+        onClose={() => setPopupIsOpen(false)}
+        onVisit={() => setVisitedSurvey(true)}
+      />
     </>
   );
 };
