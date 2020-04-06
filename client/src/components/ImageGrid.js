@@ -29,12 +29,10 @@ const trackDownloadEvent = (template) => {
 };
 
 const ImageGrid = ({ scrollPosition }) => {
-  const [templates, setTemplates] = useState([]);
+  const [templates, setTemplates] = useState({});
   useEffect(() => {
     api.get("templates").then((response) => {
-      setTemplates(
-        response.data.templates.map((template) => `/api/templates/${template}`)
-      );
+      setTemplates(response.data.templates);
     });
   }, []);
 
@@ -81,9 +79,10 @@ const ImageGrid = ({ scrollPosition }) => {
     setPopupIsOpen(false);
   };
 
+  const templatesLoaded = Object.keys(templates).length > 0;
   return (
     <>
-      <Loader loaded={templates.length > 0}>
+      <Loader loaded={templatesLoaded}>
         <div {...getRootProps({ className: "dropzone" })}>
           <input {...getInputProps()} />
           <button
@@ -107,29 +106,30 @@ const ImageGrid = ({ scrollPosition }) => {
           </button>
           <div className="masonry-wrapper">
             <div className="masonry">
-              {templates.map((template, index) => {
-                const mockup = mockups[index];
-                return (
-                  <div key={template} className="masonry-item">
-                    <div className="masonry-content">
-                      <div className="masonry-image">
-                        <img src={template} alt="" />
-                        {mockup ? (
-                          <MockupImage
-                            key={mockup}
-                            template={template}
-                            mockup={mockup}
-                            scrollPosition={scrollPosition}
-                            onDownload={onDownload}
-                          />
-                        ) : (
-                          ""
-                        )}
+              {Object.entries(templates).map(
+                ([templateId, template], index) => {
+                  const mockup = mockups[index];
+                  return (
+                    <div key={templateId} className="masonry-item">
+                      <div className="masonry-content">
+                        <div className="masonry-image">
+                          <img src={template.path} alt="" />
+                          {mockup ? (
+                            <MockupImage
+                              key={mockup}
+                              mockup={mockup}
+                              scrollPosition={scrollPosition}
+                              onDownload={() => onDownload(template.path)}
+                            />
+                          ) : (
+                            ""
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                }
+              )}
             </div>
           </div>
         </div>

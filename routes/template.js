@@ -3,7 +3,13 @@ const router = express.Router();
 const { MOCKUPS } = require("../services/mockups");
 
 router.get("/", function (req, res, next) {
-  const templates = Object.keys(MOCKUPS).map((id) => `${id}.jpg`);
+  const templates = Object.keys(MOCKUPS).reduce(
+    (obj, templateId) => ({
+      ...obj,
+      [templateId]: { path: `${req.baseUrl}/${templateId}.jpg` },
+    }),
+    {}
+  );
   res.json({ templates });
 });
 

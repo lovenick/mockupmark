@@ -13,7 +13,7 @@ const MockupLoader = ({ text = "Generating preview..." }) => {
   );
 };
 
-const MockupImage = ({ template, mockup, scrollPosition, onDownload }) => {
+const MockupImage = ({ mockup, scrollPosition, onDownload }) => {
   const [loading, setLoading] = useState(true);
   return (
     <div className="mockup-image">
@@ -33,7 +33,7 @@ const MockupImage = ({ template, mockup, scrollPosition, onDownload }) => {
             className="button btn btn-primary"
             href={mockup}
             download
-            onClick={() => onDownload(template)}
+            onClick={onDownload}
           >
             Download
           </a>
