@@ -27,10 +27,14 @@ const { generateMockup, MOCKUPS } = require("../services/mockups");
 
 /* upload artwork */
 router.post("/", upload.single("artwork"), function (req, res, next) {
-  const artwork = req.file.filename.slice(0, -4); // remove .png extension
+  const artworkId = req.file.filename.slice(0, -4); // remove .png extension
 
-  const images = Object.keys(MOCKUPS).map(
-    (templateId) => `${req.originalUrl}/${artwork}/${templateId}.jpg`
+  const images = Object.keys(MOCKUPS).reduce(
+    (obj, templateId) => ({
+      ...obj,
+      [templateId]: `${req.baseUrl}/${artworkId}/${templateId}.jpg`,
+    }),
+    {}
   );
 
   res.json({ images });

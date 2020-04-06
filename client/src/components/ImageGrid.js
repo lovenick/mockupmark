@@ -36,7 +36,7 @@ const ImageGrid = ({ scrollPosition }) => {
     });
   }, []);
 
-  const [mockups, setMockups] = useState([]);
+  const [mockups, setMockups] = useState({});
   const [uploading, setUploading] = useState(false);
   const onDrop = useCallback((acceptedFiles) => {
     setUploading(true);
@@ -106,30 +106,28 @@ const ImageGrid = ({ scrollPosition }) => {
           </button>
           <div className="masonry-wrapper">
             <div className="masonry">
-              {Object.entries(templates).map(
-                ([templateId, template], index) => {
-                  const mockup = mockups[index];
-                  return (
-                    <div key={templateId} className="masonry-item">
-                      <div className="masonry-content">
-                        <div className="masonry-image">
-                          <img src={template.path} alt="" />
-                          {mockup ? (
-                            <MockupImage
-                              key={mockup}
-                              mockup={mockup}
-                              scrollPosition={scrollPosition}
-                              onDownload={() => onDownload(template.path)}
-                            />
-                          ) : (
-                            ""
-                          )}
-                        </div>
+              {Object.entries(templates).map(([templateId, template]) => {
+                const mockup = mockups[templateId];
+                return (
+                  <div key={templateId} className="masonry-item">
+                    <div className="masonry-content">
+                      <div className="masonry-image">
+                        <img src={template.path} alt="" />
+                        {mockup ? (
+                          <MockupImage
+                            key={mockup}
+                            mockup={mockup}
+                            scrollPosition={scrollPosition}
+                            onDownload={() => onDownload(template.path)}
+                          />
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
-                  );
-                }
-              )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
