@@ -5,6 +5,7 @@ import Analytics from "./components/Analytics";
 import Navbar from "./components/Navbar";
 import ImageGrid from "./components/ImageGrid";
 import Footer from "./components/Footer";
+import CookieBanner from "./components/CookieBanner";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <ImageGrid />
       </main>
       <Footer />
+      <CookieBanner />
     </>
   );
 };
