@@ -8,36 +8,36 @@ const upload = multer({
   storage: sharpStorage({
     output: "png",
     quality: 90,
-    sharpMiddleware: function(sharp) {
+    sharpMiddleware: function (sharp) {
       sharp.resize({
         width: 480,
         height: 640,
         fit: "contain",
-        background: { r: 0, g: 0, b: 0, alpha: 0 }
+        background: { r: 0, g: 0, b: 0, alpha: 0 },
       });
       return sharp;
     },
-    destination: function(req, file, cb) {
+    destination: function (req, file, cb) {
       cb(null, "uploads");
-    }
-  })
+    },
+  }),
 });
 
 const { generateMockup, MOCKUPS } = require("../services/mockups");
 
 /* upload artwork */
-router.post("/", upload.single("artwork"), function(req, res, next) {
+router.post("/", upload.single("artwork"), function (req, res, next) {
   const artwork = req.file.filename.slice(0, -4); // remove .png extension
 
   const images = Object.keys(MOCKUPS).map(
-    templateId => `${req.originalUrl}/${artwork}/${templateId}.jpg`
+    (templateId) => `${req.originalUrl}/${artwork}/${templateId}.jpg`
   );
 
   res.json({ images });
 });
 
 /* generate artwork mockup */
-router.get("/:artworkId/:templateId.jpg", function(req, res, next) {
+router.get("/:artworkId/:templateId.jpg", function (req, res, next) {
   const artwork = `uploads/${req.params.artworkId}.png`;
   const {
     template,
@@ -45,7 +45,7 @@ router.get("/:artworkId/:templateId.jpg", function(req, res, next) {
     displacementMap,
     lightingMap,
     adjustmentMap,
-    coordinates
+    coordinates,
   } = MOCKUPS[req.params.templateId];
   const out = tempy.file({ extension: "jpg" });
   generateMockup({
@@ -56,7 +56,7 @@ router.get("/:artworkId/:templateId.jpg", function(req, res, next) {
     lightingMap,
     adjustmentMap,
     coordinates,
-    out
+    out,
   }).then(() => res.sendFile(out));
 });
 

@@ -14,16 +14,16 @@ import PopUp from "./PopUp";
 const trackUploadEvent = () => {
   ReactGA.event({
     category: "Mockup",
-    action: "Upload"
+    action: "Upload",
   });
   FacebookPixel.trackCustom("Upload");
 };
 
-const trackDownloadEvent = template => {
+const trackDownloadEvent = (template) => {
   ReactGA.event({
     category: "Mockup",
     action: "Download",
-    label: template
+    label: template,
   });
   FacebookPixel.trackCustom("Download", { template });
 };
@@ -31,25 +31,25 @@ const trackDownloadEvent = template => {
 const ImageGrid = ({ scrollPosition }) => {
   const [templates, setTemplates] = useState([]);
   useEffect(() => {
-    api.get("templates").then(response => {
+    api.get("templates").then((response) => {
       setTemplates(
-        response.data.templates.map(template => `/api/templates/${template}`)
+        response.data.templates.map((template) => `/api/templates/${template}`)
       );
     });
   }, []);
 
   const [mockups, setMockups] = useState([]);
   const [uploading, setUploading] = useState(false);
-  const onDrop = useCallback(acceptedFiles => {
+  const onDrop = useCallback((acceptedFiles) => {
     setUploading(true);
     const [artwork] = acceptedFiles;
     const formData = new FormData();
     formData.append("artwork", artwork);
     api
       .post("mockups", formData, {
-        headers: { "Content-Type": "multipart/form-data" }
+        headers: { "Content-Type": "multipart/form-data" },
       })
-      .then(response => {
+      .then((response) => {
         setMockups(response.data.images);
         setUploading(false);
       });
@@ -59,13 +59,13 @@ const ImageGrid = ({ scrollPosition }) => {
     onDrop,
     accept: "image/*",
     multiple: false,
-    noClick: true
+    noClick: true,
   });
 
   const [popupIsOpen, setPopupIsOpen] = useState(false);
   const [visitedSurvey, setVisitedSurvey] = useState(false);
 
-  const onDownload = template => {
+  const onDownload = (template) => {
     trackDownloadEvent(template);
     if (!visitedSurvey) {
       setPopupIsOpen(true);
