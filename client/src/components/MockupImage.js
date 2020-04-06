@@ -27,14 +27,17 @@ const MockupImage = ({ template, mockup, scrollPosition, onDownload }) => {
       {loading ? <MockupLoader /> : ""}
 
       {mockup && !loading ? (
-        <a
-          className="button btn btn-primary"
-          href={mockup}
-          download
-          onClick={() => onDownload(template)}
-        >
-          Download
-        </a>
+        <>
+          <div className="image-protect"></div>
+          <a
+            className="button btn btn-primary"
+            href={mockup}
+            download
+            onClick={() => onDownload(template)}
+          >
+            Download
+          </a>
+        </>
       ) : (
         ""
       )}
