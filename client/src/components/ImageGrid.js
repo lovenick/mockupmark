@@ -30,6 +30,15 @@ const trackDownloadEvent = (template) => {
   FacebookPixel.trackCustom("Download", { template });
 };
 
+const trackSelectExampleEvent = (example) => {
+  ReactGA.event({
+    category: "Mockup",
+    action: "SelectExample",
+    label: example,
+  });
+  FacebookPixel.trackCustom("SelectExample", { example });
+};
+
 const ImageGrid = ({ scrollPosition }) => {
   const [templates, setTemplates] = useState({});
   useEffect(() => {
@@ -52,6 +61,7 @@ const ImageGrid = ({ scrollPosition }) => {
       .then((response) => {
         setMockups(response.data.images);
         setUploading(false);
+        setActiveExample(null);
       });
     trackUploadEvent();
   }, []);
@@ -81,6 +91,14 @@ const ImageGrid = ({ scrollPosition }) => {
     setPopupIsOpen(false);
   };
 
+  const [activeExample, setActiveExample] = useState();
+
+  const onSelectExample = (exampleId, mockups) => {
+    setMockups(mockups);
+    setActiveExample(exampleId);
+    trackSelectExampleEvent(exampleId);
+  };
+
   const templatesLoaded = Object.keys(templates).length > 0;
   return (
     <>
@@ -106,7 +124,7 @@ const ImageGrid = ({ scrollPosition }) => {
               "Upload your design"
             )}
           </button>
-          <Examples onSelect={setMockups} />
+          <Examples onSelect={onSelectExample} activeExample={activeExample} />
           <div className="masonry-wrapper">
             <div className="masonry">
               {Object.entries(templates).map(([templateId, template]) => {

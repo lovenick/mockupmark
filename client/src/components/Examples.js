@@ -27,8 +27,9 @@ const Examples = ({ onSelect, activeExample }) => {
             <img
               src={example.path}
               alt=""
+              className={exampleId === activeExample ? "active" : ""}
               onClick={() => {
-                onSelect(example.mockups);
+                onSelect(exampleId, example.mockups);
               }}
             />
           </div>
