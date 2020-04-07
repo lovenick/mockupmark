@@ -1,0 +1,22 @@
+.example-container {
+  margin: 1em 0;
+}
+
+.example-images {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 0;
+
+  .image-container {
+    flex-shrink: 1;
+  }
+  img {
+    max-width: 100%;
+    cursor: pointer;
+    transition: 0.2s opacity;
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

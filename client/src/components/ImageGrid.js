@@ -7,9 +7,11 @@ import ReactGA from "react-ga";
 import FacebookPixel from "react-facebook-pixel";
 
 import api from "../api";
+
+import Examples from "./Examples";
 import MockupImage from "./MockupImage";
-import "./ImageGrid.scss";
 import PopUp from "./PopUp";
+import "./ImageGrid.scss";
 
 const trackUploadEvent = () => {
   ReactGA.event({
@@ -104,6 +106,7 @@ const ImageGrid = ({ scrollPosition }) => {
               "Upload your design"
             )}
           </button>
+          <Examples onSelect={setMockups} />
           <div className="masonry-wrapper">
             <div className="masonry">
               {Object.entries(templates).map(([templateId, template]) => {

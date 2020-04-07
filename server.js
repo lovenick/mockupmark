@@ -4,6 +4,7 @@ var path = require("path");
 
 var templateRouter = require("./routes/template");
 var mockupRouter = require("./routes/mockup");
+var exampleRouter = require("./routes/example");
 
 var app = express();
 
@@ -14,6 +15,7 @@ app.use(express.static(path.join(__dirname, "client/build")));
 
 app.use("/api/templates", templateRouter);
 app.use("/api/mockups", mockupRouter);
+app.use("/api/examples", exampleRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + `/client/build/index.html`));
